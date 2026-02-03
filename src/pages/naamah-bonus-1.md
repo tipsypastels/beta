@@ -2,7 +2,17 @@
 beta: naamah-bonus-1
 layout: ../layouts/Layout.astro
 title: Chapter Bonus 1
-excerpt: ' Every night, the demon showed Alice a new way she could die. And every morning, she woke up screaming. In the first weeks after the nightmares began, she''d have done anything to manage to stay awake for a single night. So Naamah gave her just that. A long sleepless night, with just the two of them. "Kill yourself," the voice from the core of her…'
+excerpt: >-
+  Every night, the demon showed Alice a new way she could die. And every
+  morning, she woke up screaming. In the first weeks after the nightmares began,
+  she'd have done anything to manage to stay awake for a single night.
+
+
+  So Naamah gave her just that. A long sleepless night, with just the two of
+  them.
+
+
+  "Kill yourself," the voice from the core of her 
 path: Naamah/Chapter Bonus 1.md
 ---
 

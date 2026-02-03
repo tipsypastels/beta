@@ -2,7 +2,12 @@
 beta: foil-flay-1
 layout: ../layouts/Layout.astro
 title: 1. The World Reversed
-excerpt: ' Deep in the gloom of the concrete jungle lies hidden Bellbirdtown. Once it was a mere shantytown, but now it has a life of its own. You could walk around the area a dozen times and only come away with a dream-impression of it, like a mirage. It''s made of piers and docks and waving white flags and structures built overtop of the water and each…'
+excerpt: >-
+  Deep in the gloom of the concrete jungle lies hidden Bellbirdtown. Once it was
+  a mere shantytown, but now it has a life of its own. You could walk around the
+  area a dozen times and only come away with a dream-impression of it, like a
+  mirage. It's made of piers and docks and waving white flags and structures
+  built overtop of the water and each other
 path: Foil & Flay/Chapters/1. The World Reversed.md
 ---
 
