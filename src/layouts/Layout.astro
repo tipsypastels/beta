@@ -9,6 +9,9 @@ interface Props {
 }
 
 const { frontmatter } = Astro.props;
+
+const chapter = frontmatter.title.split(". ")[0];
+const title = frontmatter.title.replace(/^(?:\d)+\. /, "");
 const story = frontmatter.path.split("/")[0];
 ---
 
@@ -19,12 +22,15 @@ const story = frontmatter.path.split("/")[0];
     <link rel="icon" href="/beta/favicon.ico" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>{frontmatter.title}</title>
+    <title>{title} • {story}</title>
   </head>
   <body class="bg-stone-950 px-4 py-8 text-white lg:my-16">
     <div class="prose prose-stone prose-invert m-auto max-w-[80ch]">
-      <h2 class="text-yellow-600">{story}</h2>
-      <h1>{frontmatter.title}</h1>
+      <h3>
+        <span class="text-yellow-600">{story}</span>
+        <span class="text-stone-500">• Chapter {chapter}</span>
+      </h3>
+      <h1>{title}</h1>
       <slot />
     </div>
   </body>
