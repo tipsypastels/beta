@@ -5,6 +5,7 @@ interface Props {
   frontmatter: {
     title: string;
     path: string;
+    excerpt: string;
   };
 }
 
@@ -26,6 +27,7 @@ const story = frontmatter.path.split("/")[0];
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={`${title} • ${story}`} />
+    <meta property="og:description" content={frontmatter.excerpt} />
 
     <title>{title} • {story}</title>
   </head>
