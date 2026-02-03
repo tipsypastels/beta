@@ -20,8 +20,13 @@ const story = frontmatter.path.split("/")[0];
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/beta/favicon.svg" />
     <link rel="icon" href="/beta/favicon.ico" />
-    <meta name="viewport" content="width=device-width" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={`${title} • ${story}`} />
+
     <title>{title} • {story}</title>
   </head>
   <body class="bg-stone-950 px-4 py-8 text-white lg:my-16">
