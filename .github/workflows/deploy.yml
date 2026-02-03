@@ -20,6 +20,7 @@ jobs:
         uses: withastro/action@v5
         env:
           PUBLIC_BETA_API: ${{ vars.PUBLIC_BETA_API }}
+          FONTAWESOME_PACKAGE_TOKEN: ${{ secrets.FONTAWESOME_PACKAGE_TOKEN }}
 
   deploy:
     needs: build
