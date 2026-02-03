@@ -1,7 +1,7 @@
 ---
 beta: foil-flay-1
 layout: ../layouts/Layout.astro
-title: 1. The World Reversed.md
+title: 1. The World Reversed
 path: Foil & Flay/Chapters/1. The World Reversed.md
 ---
 
