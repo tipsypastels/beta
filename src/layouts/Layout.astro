@@ -20,13 +20,14 @@ const story = frontmatter.path.split("/")[0];
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/beta/favicon.svg" />
     <link rel="icon" href="/beta/favicon.png" />
+    <meta name="theme-color" content="#ca8a04" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
 
-    <meta name="theme-color" content="#ca8a04" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={`${title} • ${story}`} />
+    <meta property="og:site_name" content="Tipsy's Beta Tool" />
     <meta property="og:description" content={frontmatter.excerpt} />
 
     <title>{title} • {story}</title>
