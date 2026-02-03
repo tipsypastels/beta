@@ -4,7 +4,10 @@ import { faEye } from "@fortawesome/pro-solid-svg-icons";
 
 const USERNAME_LS_KEY = "beta:username";
 
-type ClientMessage = { type: "identify"; username: string };
+type ClientMessage =
+  | { type: "identify"; username: string }
+  | { type: "active" };
+
 type ServerMessage = { type: "users"; users: ServerUser[] };
 
 interface ServerUser {
@@ -12,6 +15,7 @@ interface ServerUser {
   username?: string;
   color: string;
   you?: boolean;
+  active: number;
 }
 
 export interface ConnectionProps {
@@ -56,6 +60,25 @@ export function Connection({ path }: ConnectionProps) {
   }, [path, connected]);
 
   useEffect(() => {
+    let active = false;
+
+    const interval = setInterval(() => {
+      if (active) send({ type: "active" });
+      active = false;
+    }, 60 * 1000);
+
+    document.addEventListener("scroll", () => {
+      active = true;
+    });
+
+    document.addEventListener("mousemove", () => {
+      active = true;
+    });
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
     return () => ws.current?.close();
   }, []);
 
@@ -76,9 +99,11 @@ export function Connection({ path }: ConnectionProps) {
                 <li
                   key={user.uuid}
                   style={{ backgroundColor: user.color }}
-                  className="flex h-8 w-8 items-center justify-center rounded-full border-yellow-600 text-xl font-bold text-black select-none data-[you=true]:border-2"
+                  className="flex h-8 w-8 items-center justify-center rounded-full border-yellow-600 text-xl font-bold text-black select-none data-[idle=true]:opacity-50 data-[you=true]:border-2"
                   title={`${user.username ?? "Guest"}${user.you ? " (You)" : ""}`}
                   data-you={user.you}
+                  data-idle={user.active <= Date.now() - 10 * 60 * 1000}
+                  data-active={user.active}
                 >
                   {user.username?.charAt(0).toUpperCase() ?? "?"}
                 </li>
