@@ -10,7 +10,6 @@ interface Props {
 }
 
 const { frontmatter } = Astro.props;
-
 const chapter = frontmatter.title.split(". ")[0];
 const title = frontmatter.title.replace(/^(?:\d)+\. /, "");
 const story = frontmatter.path.split("/")[0];
@@ -20,7 +19,7 @@ const story = frontmatter.path.split("/")[0];
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/beta/favicon.svg" />
-    <link rel="icon" href="/beta/favicon.ico" />
+    <link rel="icon" href="/beta/favicon.png" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
