@@ -1,6 +1,7 @@
 ---
 import { Active } from "../components/ws/Active";
 import { Crowd } from "../components/ws/Crowd";
+import { Login } from "../components/ws/Login";
 import { Provider } from "../components/ws/Provider";
 import "../styles/global.css";
 
@@ -41,6 +42,7 @@ const story = frontmatter.path.split("/")[0];
   <body class="bg-stone-950 px-4 py-8 text-white lg:my-16">
     <Provider client:load path={frontmatter.path} />
     <Active client:load />
+    <Login client:load />
 
     <div class="prose prose-stone prose-invert m-auto max-w-[80ch]">
       <h3>

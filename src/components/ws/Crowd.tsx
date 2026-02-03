@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type { ServerUser } from "../../types/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/pro-solid-svg-icons";
-import { $connected, wsOn, wsSend } from "./store";
+import { $connected, $username, wsOn, wsSend } from "./store";
 import { useStore } from "@nanostores/react";
 
 export function Crowd() {
@@ -19,7 +19,10 @@ export function Crowd() {
   useEffect(() => {
     if (!connected) return;
     const username = localStorage.getItem("beta:username");
-    if (username) wsSend({ type: "identify", username });
+    if (username) {
+      wsSend({ type: "identify", username });
+      $username.set(username);
+    }
   }, [connected]);
 
   if (users.length === 0) return null;

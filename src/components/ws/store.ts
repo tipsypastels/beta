@@ -1,7 +1,9 @@
 import { atom } from "nanostores";
 import type { ClientMessage, ServerMessage } from "../../types/api";
 
-export const $ws = atom<WebSocket | null>(null);
+export const $ws = atom<WebSocket | undefined>();
+export const $username = atom<string | undefined>();
+
 export const $connected = atom(false);
 export const $handlers = atom<((message: ServerMessage) => void)[]>([]);
 
