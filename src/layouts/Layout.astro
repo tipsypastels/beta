@@ -10,8 +10,11 @@ interface Props {
 }
 
 const { frontmatter } = Astro.props;
-const chapter = frontmatter.title.split(". ")[0];
-const title = frontmatter.title.replace(/^(?:\d)+\. /, "");
+const chapter = frontmatter.title.match(/^(?:\d+)\. /)
+  ? frontmatter.title.split(". ")[0]
+  : undefined;
+
+const title = frontmatter.title.replace(/^(?:\d+)\. /, "");
 const story = frontmatter.path.split("/")[0];
 ---
 
@@ -36,7 +39,11 @@ const story = frontmatter.path.split("/")[0];
     <div class="prose prose-stone prose-invert m-auto max-w-[80ch]">
       <h3>
         <span class="text-yellow-600">{story}</span>
-        <span class="text-stone-500">• Chapter {chapter}</span>
+        {
+          chapter ? (
+            <span class="text-stone-500">• Chapter {chapter}</span>
+          ) : null
+        }
       </h3>
       <h1>{title}</h1>
       <slot />
