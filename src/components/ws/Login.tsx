@@ -11,6 +11,7 @@ export function Login() {
 
   return (
     <form
+      className="fixed bottom-0 left-0 my-8 flex w-screen items-center justify-center"
       onSubmit={(e) => {
         e.preventDefault();
         if (!usernameInput) return;
@@ -21,7 +22,7 @@ export function Login() {
       }}
     >
       <input
-        className="fixed top-0 right-0 m-8 rounded-lg border-2 border-white bg-yellow-600 p-4 shadow-2xl"
+        className="rounded-lg border-2 border-white bg-yellow-600 p-4 shadow-2xl"
         placeholder="Enter a username?"
         value={usernameInput}
         onChange={(e) => setUsernameInput(e.target.value)}
