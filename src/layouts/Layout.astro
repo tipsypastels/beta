@@ -1,5 +1,7 @@
 ---
-import { Connection } from "../components/Connection.tsx";
+import { Active } from "../components/ws/Active";
+import { Crowd } from "../components/ws/Crowd";
+import { Provider } from "../components/ws/Provider";
 import "../styles/global.css";
 
 interface Props {
@@ -37,6 +39,9 @@ const story = frontmatter.path.split("/")[0];
     <title>{title} • {story}</title>
   </head>
   <body class="bg-stone-950 px-4 py-8 text-white lg:my-16">
+    <Provider client:load path={frontmatter.path} />
+    <Active client:load />
+
     <div class="prose prose-stone prose-invert m-auto max-w-[80ch]">
       <h3>
         <span class="text-yellow-600">{story}</span>
@@ -47,8 +52,10 @@ const story = frontmatter.path.split("/")[0];
         }
       </h3>
       <h1 class="mb-4">{title}</h1>
+      <div class="not-prose">
+        <Crowd client:load />
+      </div>
       <slot />
     </div>
-    <Connection client:load path={frontmatter.path} />
   </body>
 </html>
