@@ -39,8 +39,9 @@ export function Crowd() {
               className="flex h-8 w-8 items-center justify-center rounded-full border-yellow-600 text-xl font-bold text-black select-none data-[idle=true]:opacity-50 data-[you=true]:border-2"
               title={`${user.username ?? "Guest"}${user.you ? " (You)" : ""}`}
               data-you={user.you}
-              data-idle={user.active <= Date.now() - 10 * 60 * 1000}
-              data-active={user.active}
+              data-idle={
+                !user.you && user.active <= Date.now() - 10 * 60 * 1000
+              }
             >
               {user.username?.charAt(0).toUpperCase() ?? "?"}
             </li>
