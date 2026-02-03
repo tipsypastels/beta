@@ -47,10 +47,8 @@ const story = frontmatter.path.split("/")[0];
         }
       </h3>
       <h1 class="mb-4">{title}</h1>
-      <div class="not-prose">
-        <Connection client:load path={frontmatter.path} />
-      </div>
       <slot />
     </div>
+    <Connection client:load path={frontmatter.path} />
   </body>
 </html>
