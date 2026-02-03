@@ -4,10 +4,12 @@ import "../styles/global.css";
 interface Props {
   frontmatter: {
     title: string;
+    path: string;
   };
 }
 
 const { frontmatter } = Astro.props;
+const story = frontmatter.path.split("/")[0];
 ---
 
 <html lang="en">
@@ -20,7 +22,8 @@ const { frontmatter } = Astro.props;
     <title>{frontmatter.title}</title>
   </head>
   <body class="bg-stone-950 text-white lg:my-24">
-    <div class="prose prose-stone prose-invert m-auto">
+    <div class="prose prose-stone prose-invert xl:prose-lg m-auto">
+      <h2 class="text-yellow-600">{story}</h2>
       <h1>{frontmatter.title}</h1>
       <slot />
     </div>
