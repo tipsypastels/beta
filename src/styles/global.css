@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+::selection {
+  @apply bg-yellow-600;
+}
+
 html {
   scroll-behavior: smooth;
 }
