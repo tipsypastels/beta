@@ -3,6 +3,7 @@ import type { ClientMessage, ServerMessage } from "../../types/api";
 
 export const $ws = atom<WebSocket | undefined>();
 export const $username = atom<string | undefined>();
+export const $showScroll = atom(true);
 
 export const $connected = atom(false);
 export const $handlers = atom<((message: ServerMessage) => void)[]>([]);

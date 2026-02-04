@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import type { ServerUser } from "../../types/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/pro-solid-svg-icons";
-import { $connected, $username, wsOn, wsSend } from "./store";
+import { faEye, faEyeSlash } from "@fortawesome/pro-solid-svg-icons";
+import { $connected, $showScroll, $username, wsOn, wsSend } from "./store";
 import { useStore } from "@nanostores/react";
 import { AnimatePresence, motion } from "motion/react";
 
 export function Crowd() {
   const connected = useStore($connected);
+  const showScroll = useStore($showScroll);
   const [users, setUsers] = useState<ServerUser[]>([]);
 
   useEffect(() => {
@@ -35,11 +36,17 @@ export function Crowd() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <FontAwesomeIcon
-              icon={faEye}
-              className="text-yellow-600"
-              size="2x"
-            />
+            <button
+              title={`${showScroll ? "Hide" : "Show"} Scroll Positions`}
+              className="cursor-pointer"
+              onClick={() => $showScroll.set(!showScroll)}
+            >
+              <FontAwesomeIcon
+                icon={showScroll ? faEye : faEyeSlash}
+                className="text-yellow-600"
+                size="2x"
+              />
+            </button>
             <div className="ml-2 flex gap-2">
               {users.map((user) => (
                 <a
@@ -61,20 +68,26 @@ export function Crowd() {
         )}
       </AnimatePresence>
 
-      {users.map((user) =>
-        !user.you ? (
-          <motion.div
-            id={`scroll-${user.uuid}`}
-            key={user.uuid}
-            className="absolute rounded-r-lg border-2 border-l-0 p-1 pr-2 text-sm font-bold text-black"
-            style={{ color: user.color, borderColor: user.color }}
-            initial={{ left: -100, top: user.scroll }}
-            animate={{ left: 0, top: user.scroll }}
-          >
-            @{user.username ?? "Guest"}
-          </motion.div>
-        ) : null,
-      )}
+      {showScroll
+        ? users.map((user) =>
+            !user.you ? (
+              <motion.div
+                id={`scroll-${user.uuid}`}
+                key={user.uuid}
+                className="absolute rounded-r-lg border-2 border-l-0 bg-black p-1 pr-2 text-sm font-bold text-black"
+                style={{
+                  color: user.color,
+                  borderColor: user.color,
+                  top: user.scroll,
+                }}
+                initial={{ left: -100 }}
+                animate={{ left: 0 }}
+              >
+                @{user.username ?? "Guest"}
+              </motion.div>
+            ) : null,
+          )
+        : null}
     </>
   );
 }
