@@ -75,13 +75,9 @@ export function Crowd() {
                 id={`scroll-${user.uuid}`}
                 key={user.uuid}
                 className="absolute rounded-r-lg border-2 border-l-0 bg-black p-1 pr-2 text-sm font-bold text-black"
-                style={{
-                  color: user.color,
-                  borderColor: user.color,
-                  top: user.scroll,
-                }}
-                initial={{ left: -100 }}
-                animate={{ left: 0 }}
+                style={{ color: user.color, borderColor: user.color }}
+                initial={{ left: -100, top: user.scroll }}
+                animate={{ left: 0, top: user.scroll }}
               >
                 @{user.username ?? "Guest"}
               </motion.div>
