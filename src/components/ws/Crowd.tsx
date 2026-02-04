@@ -66,7 +66,7 @@ export function Crowd() {
             <motion.div
               key={user.uuid}
               title={user.username ?? "Guest"}
-              className="absolute left-4 h-screen w-2 border-y-2 border-l-2"
+              className="absolute left-0 h-screen w-2 border-y-2 border-l-2 md:left-4"
               style={{ borderColor: user.color }}
               animate={{ top: user.scroll }}
             ></motion.div>
