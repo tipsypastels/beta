@@ -18,7 +18,12 @@ export function Login() {
             e.preventDefault();
             if (!usernameInput) return;
 
-            wsSend({ type: "identify", username: usernameInput });
+            wsSend({
+              type: "identify",
+              username: usernameInput,
+              scroll: scrollY,
+            });
+
             $username.set(usernameInput);
             localStorage.setItem("beta:username", usernameInput);
           }}

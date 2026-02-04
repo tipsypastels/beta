@@ -21,7 +21,7 @@ export function Crowd() {
     if (!connected) return;
     const username = localStorage.getItem("beta:username");
     if (username) {
-      wsSend({ type: "identify", username });
+      wsSend({ type: "identify", username, scroll: scrollY });
       $username.set(username);
     }
   }, [connected]);
@@ -61,28 +61,20 @@ export function Crowd() {
         )}
       </AnimatePresence>
 
-      <AnimatePresence>
-        {users.length > 1 ? (
+      {users.map((user) =>
+        !user.you ? (
           <motion.div
-            className="absolute top-0 left-0 h-full"
-            initial={{ x: -20 }}
-            animate={{ x: 0 }}
+            id={`scroll-${user.uuid}`}
+            key={user.uuid}
+            className="absolute rounded-r-lg border-2 border-l-0 p-1 pr-2 text-sm font-bold text-black"
+            style={{ color: user.color, borderColor: user.color }}
+            initial={{ left: -100, top: user.scroll }}
+            animate={{ left: 0, top: user.scroll }}
           >
-            {users.map((user) =>
-              !user.you ? (
-                <motion.div
-                  id={`scroll-${user.uuid}`}
-                  key={user.uuid}
-                  title={user.username ?? "Guest"}
-                  className="absolute left-0 h-screen w-2 border-y-2 border-l-2 md:left-4"
-                  style={{ borderColor: user.color }}
-                  animate={{ top: user.scroll }}
-                ></motion.div>
-              ) : null,
-            )}
+            @{user.username ?? "Guest"}
           </motion.div>
-        ) : null}
-      </AnimatePresence>
+        ) : null,
+      )}
     </>
   );
 }
