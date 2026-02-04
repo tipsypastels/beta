@@ -1,6 +1,6 @@
 export type ClientMessage =
   | { type: "identify"; username: string }
-  | { type: "active" };
+  | { type: "active"; scroll?: number };
 
 export type ServerMessage = { type: "users"; users: ServerUser[] };
 
@@ -10,4 +10,5 @@ export interface ServerUser {
   color: string;
   you?: boolean;
   active: number;
+  scroll?: number;
 }

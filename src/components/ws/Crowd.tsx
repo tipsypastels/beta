@@ -27,32 +27,52 @@ export function Crowd() {
   }, [connected]);
 
   return (
-    <AnimatePresence>
-      {users.length > 0 && (
-        <motion.div
-          className="inline-flex items-center rounded-2xl border-2 border-yellow-600 bg-stone-950 p-2"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          <FontAwesomeIcon icon={faEye} className="text-yellow-600" size="2x" />
-          <ul className="ml-2 flex gap-2">
-            {users.map((user) => (
-              <li
-                key={user.uuid}
-                style={{ backgroundColor: user.color }}
-                className="flex h-8 w-8 items-center justify-center rounded-full border-yellow-600 text-xl font-bold text-black select-none data-[idle=true]:opacity-50 data-[you=true]:border-2"
-                title={`${user.username ?? "Guest"}${user.you ? " (You)" : ""}`}
-                data-you={user.you}
-                data-idle={
-                  !user.you && user.active <= Date.now() - 10 * 60 * 1000
-                }
-              >
-                {user.username?.charAt(0).toUpperCase() ?? "?"}
-              </li>
-            ))}
-          </ul>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <>
+      <AnimatePresence>
+        {users.length > 0 && (
+          <motion.div
+            className="inline-flex items-center rounded-2xl border-2 border-yellow-600 bg-stone-950 p-2"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <FontAwesomeIcon
+              icon={faEye}
+              className="text-yellow-600"
+              size="2x"
+            />
+            <ul className="ml-2 flex gap-2">
+              {users.map((user) => (
+                <li
+                  key={user.uuid}
+                  style={{ backgroundColor: user.color }}
+                  className="flex h-8 w-8 items-center justify-center rounded-full border-yellow-600 text-xl font-bold text-black select-none data-[idle=true]:opacity-50 data-[you=true]:border-2"
+                  title={`${user.username ?? "Guest"}${user.you ? " (You)" : ""}`}
+                  data-you={user.you}
+                  data-idle={
+                    !user.you && user.active <= Date.now() - 10 * 60 * 1000
+                  }
+                >
+                  {user.username?.charAt(0).toUpperCase() ?? "?"}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div>
+        {users.map((user) =>
+          !user.you && user.scroll ? (
+            <motion.div
+              key={user.uuid}
+              title={user.username ?? "Guest"}
+              className="absolute left-4 h-screen w-2 border-y-2 border-l-2"
+              style={{ borderColor: user.color }}
+              animate={{ top: user.scroll }}
+            ></motion.div>
+          ) : null,
+        )}
+      </div>
+    </>
   );
 }
