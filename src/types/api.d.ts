@@ -10,5 +10,5 @@ export interface ServerUser {
   color: string;
   you?: boolean;
   active: number;
-  scroll?: number;
+  scroll: number;
 }

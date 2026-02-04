@@ -61,20 +61,28 @@ export function Crowd() {
         )}
       </AnimatePresence>
 
-      <div>
-        {users.map((user) =>
-          !user.you && user.scroll ? (
-            <motion.div
-              id={`scroll-${user.uuid}`}
-              key={user.uuid}
-              title={user.username ?? "Guest"}
-              className="absolute left-0 h-screen w-2 border-y-2 border-l-2 md:left-4"
-              style={{ borderColor: user.color }}
-              animate={{ top: user.scroll }}
-            ></motion.div>
-          ) : null,
-        )}
-      </div>
+      <AnimatePresence>
+        {users.length > 1 ? (
+          <motion.div
+            className="absolute top-0 left-0 h-full"
+            initial={{ x: -20 }}
+            animate={{ x: 0 }}
+          >
+            {users.map((user) =>
+              !user.you ? (
+                <motion.div
+                  id={`scroll-${user.uuid}`}
+                  key={user.uuid}
+                  title={user.username ?? "Guest"}
+                  className="absolute left-0 h-screen w-2 border-y-2 border-l-2 md:left-4"
+                  style={{ borderColor: user.color }}
+                  animate={{ top: user.scroll }}
+                ></motion.div>
+              ) : null,
+            )}
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </>
   );
 }

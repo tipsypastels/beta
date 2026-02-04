@@ -8,7 +8,7 @@ export function Active() {
     const interval = setInterval(() => {
       if (active) wsSend({ type: "active", scroll: scrollY });
       active = false;
-    }, 15 * 1000);
+    }, 10 * 1000);
 
     document.addEventListener("scroll", () => {
       active = true;
