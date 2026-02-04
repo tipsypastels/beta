@@ -40,9 +40,10 @@ export function Crowd() {
               className="text-yellow-600"
               size="2x"
             />
-            <ul className="ml-2 flex gap-2">
+            <div className="ml-2 flex gap-2">
               {users.map((user) => (
-                <li
+                <a
+                  href={`#scroll-${user.uuid}`}
                   key={user.uuid}
                   style={{ backgroundColor: user.color }}
                   className="flex h-8 w-8 items-center justify-center rounded-full border-yellow-600 text-xl font-bold text-black select-none data-[idle=true]:opacity-50 data-[you=true]:border-2"
@@ -53,9 +54,9 @@ export function Crowd() {
                   }
                 >
                   {user.username?.charAt(0).toUpperCase() ?? "?"}
-                </li>
+                </a>
               ))}
-            </ul>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -64,6 +65,7 @@ export function Crowd() {
         {users.map((user) =>
           !user.you && user.scroll ? (
             <motion.div
+              id={`scroll-${user.uuid}`}
               key={user.uuid}
               title={user.username ?? "Guest"}
               className="absolute left-0 h-screen w-2 border-y-2 border-l-2 md:left-4"
